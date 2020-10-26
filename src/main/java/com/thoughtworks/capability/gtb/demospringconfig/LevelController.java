@@ -7,11 +7,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LevelController {
 
-    @Value("${levelNumber}")
     private int levelNumber;
+
+    public LevelController(@Value("${levelNumber}") int levelNumber) {
+        this.levelNumber = levelNumber;
+    }
 
     @GetMapping("/level")
     public String getLevel() {
+        System.out.println(levelNumber);
         return levelNumber < 1 ? "basic" : "advanced";
     }
 }
