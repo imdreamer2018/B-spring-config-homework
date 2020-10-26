@@ -13,6 +13,7 @@ public class MailConfig {
     private String from;
     private List<String> defaultRecipients;
     private Map<String,Boolean> additionalHeaders;
+    private CredentialsProperties credentials;
 
     public String getHostname() {
         return hostname;
@@ -54,6 +55,44 @@ public class MailConfig {
         this.additionalHeaders = additionalHeaders;
     }
 
+    private static class CredentialsProperties {
+        private String username;
+        private String password;
+        private String authMethod;
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public String getAuthMethod() {
+            return authMethod;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public void setAuthMethod(String authMethod) {
+            this.authMethod = authMethod;
+        }
+    }
+
+    public CredentialsProperties getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(CredentialsProperties credentials) {
+        this.credentials = credentials;
+    }
+
     @Override
     public String toString() {
         return "MailConfig{" +
@@ -65,7 +104,13 @@ public class MailConfig {
                 defaultRecipients.get(1) + "']" +
                 ",additionalHeaders={" +
                 "redelivery=" + additionalHeaders.get("redelivery") +
-                "secure=" + additionalHeaders.get("secure") +
+                ",secure=" + additionalHeaders.get("secure") +
+                "}" +
+                ",credentials={" +
+                "username='" + credentials.username + '\'' +
+                ",password='" + credentials.password + '\'' +
+                ",authMethod='" + credentials.authMethod + '\'' +
+                "}" +
                 "}";
     }
 }
